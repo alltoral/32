@@ -1,0 +1,572 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Toral faz 32</title>
+<meta name="description" content="Sabado, 14 de novembro de 2026, em Curitiba. Brunch, contemplacao e jovem demais pra ser velho.">
+<meta name="theme-color" content="#0e0509">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Toral faz 32">
+<meta property="og:description" content="Sabado, 14 de novembro de 2026, em Curitiba. Um dia inteiro, sem pressa.">
+<meta property="og:image" content="toral.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;0,6..96,700;1,6..96,400;1,6..96,500&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --noite:#0e0509;
+  --noite2:#1c0d14;
+  --creme:#f7ebe0;
+  --rosa:#ff2f87;
+  --rosa2:#ff7ab6;
+  --rosa3:#ffb3d4;
+  --amarelo:#ffd23f;
+  --amarelo2:#ffe98a;
+  --amarelo3:#fff6cf;
+  --gut:max(20px, env(safe-area-inset-left));
+  --gutr:max(20px, env(safe-area-inset-right));
+  --grao:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='0.5'/%3E%3C/svg%3E");
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--noite);
+  color:var(--creme);
+  font-family:'Jost',system-ui,sans-serif;
+  font-weight:300;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+html.fechado,html.fechado body{overflow:hidden;height:100%}
+
+/* ---------- luz de gel + grão ---------- */
+.gels{position:fixed;inset:-20%;z-index:0;pointer-events:none;filter:blur(60px) saturate(165%);opacity:1}
+.gel{position:absolute;border-radius:50%;mix-blend-mode:screen;animation:deriva 26s ease-in-out infinite alternate}
+.g1{width:72vmax;height:72vmax;left:-24vmax;top:-18vmax;background:radial-gradient(circle at 40% 40%,rgba(255,210,63,.5),rgba(255,210,63,0) 60%)}
+.g2{width:62vmax;height:62vmax;right:-20vmax;top:6vmax;background:radial-gradient(circle at 50% 50%,rgba(255,47,135,.9),rgba(255,47,135,0) 64%);animation-duration:34s;animation-delay:-6s}
+.g3{width:58vmax;height:58vmax;left:-14vmax;bottom:-16vmax;background:radial-gradient(circle at 50% 50%,rgba(255,122,182,.72),rgba(255,122,182,0) 62%);animation-duration:30s;animation-delay:-12s}
+.g4{width:46vmax;height:46vmax;right:-10vmax;bottom:4vmax;background:radial-gradient(circle at 50% 50%,rgba(255,233,138,.28),rgba(255,233,138,0) 62%);animation-duration:38s;animation-delay:-18s}
+@keyframes deriva{
+  0%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(6vmax,-5vmax,0) scale(1.12)}
+  100%{transform:translate3d(-5vmax,6vmax,0) scale(.96)}
+}
+.grao{position:fixed;inset:-50%;z-index:60;pointer-events:none;background-image:var(--grao);opacity:.2;mix-blend-mode:overlay;animation:tremor .6s steps(2) infinite}
+@keyframes tremor{0%{transform:translate(0,0)}25%{transform:translate(-2%,1%)}50%{transform:translate(1%,-2%)}75%{transform:translate(2%,2%)}100%{transform:translate(-1%,-1%)}}
+.vinheta{position:fixed;inset:0;z-index:55;pointer-events:none;background:radial-gradient(ellipse at 50% 42%,transparent 44%,rgba(12,5,9,.72) 100%)}
+canvas#glitter{position:fixed;inset:0;z-index:58;pointer-events:none;opacity:0;transition:opacity 1.2s ease 1s}
+html.aberto canvas#glitter{opacity:1}
+
+/* ---------- envelope ---------- */
+.env{
+  position:fixed;inset:0;z-index:100;border:0;padding:0;margin:0;cursor:pointer;
+  width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:36px;
+  background:radial-gradient(120% 90% at 50% 18%,#1d0d16,#070306 70%);
+  color:var(--creme);font-family:'Jost',sans-serif;
+  transition:opacity .9s ease 2.9s;
+}
+.envelope{position:relative;width:min(78vw,330px);aspect-ratio:3/2;perspective:900px}
+.glit{
+  background-color:#07040a;
+  background-image:
+    radial-gradient(130% 85% at 26% -10%,rgba(255,255,255,.17),rgba(255,255,255,.04) 42%,transparent 62%),
+    radial-gradient(90% 70% at 86% 108%,rgba(255,255,255,.09),transparent 58%),
+    linear-gradient(152deg,#1c1219 0%,#09050b 46%,#171016 100%);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14),inset 0 -1px 0 rgba(255,255,255,.05);
+}
+.corpo{position:absolute;inset:0;border-radius:8px;box-shadow:0 36px 70px rgba(0,0,0,.6)}
+.envelope::after{content:"";position:absolute;inset:0;z-index:6;pointer-events:none;border-radius:8px;overflow:hidden;
+  background:linear-gradient(104deg,transparent 40%,rgba(255,255,255,.1) 48%,rgba(255,255,255,.26) 51%,rgba(255,255,255,.08) 54%,transparent 62%);
+  background-size:260% 100%;animation:lustro 5s ease-in-out infinite}
+@keyframes lustro{0%{background-position:160% 0}55%,100%{background-position:-60% 0}}
+.cartinha{position:absolute;left:7%;top:7%;width:86%;height:86%;border-radius:6px;z-index:2;
+  background:linear-gradient(162deg,#fff9c2,#fae204 55%,#f2c900);
+  box-shadow:0 10px 26px rgba(0,0,0,.4);display:flex;flex-direction:column;align-items:center;justify-content:flex-start;
+  padding-top:9%;gap:7px;color:#1a0610}
+.cartinha em{font-style:normal;font-size:8px;letter-spacing:.34em;text-transform:uppercase;opacity:.55;margin-bottom:4px}
+.cartinha b{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(24px,7vw,34px);line-height:1.05;text-align:center}
+.cartinha i{font-style:normal;font-size:8px;letter-spacing:.3em;text-transform:uppercase;opacity:.6}
+.cartinha::after{content:"";position:absolute;inset:0;border-radius:6px;border:1px solid rgba(255,47,135,.35)}
+.frente{position:absolute;inset:0;border-radius:8px;z-index:3;
+  -webkit-clip-path:polygon(0 0,50% 46%,100% 0,100% 100%,0 100%);clip-path:polygon(0 0,50% 46%,100% 0,100% 100%,0 100%)}
+.frente::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.07),transparent 40%)}
+.aba{position:absolute;left:0;top:0;width:100%;height:52%;z-index:5;transform-origin:top center;transform:rotateX(0deg);
+  -webkit-clip-path:polygon(0 0,100% 0,50% 100%);clip-path:polygon(0 0,100% 0,50% 100%);
+  transition:transform 1s cubic-bezier(.6,0,.25,1),z-index 0s linear .42s}
+.aba::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(0,0,0,.35))}
+.lacre{position:absolute;left:50%;top:46%;width:78px;height:78px;margin:-39px 0 0 -39px;border-radius:50%;z-index:7;
+  transition:opacity .35s ease,transform .5s cubic-bezier(.6,0,.25,1)}
+.esfera{position:absolute;inset:0;border-radius:50%;overflow:hidden;
+  background:radial-gradient(circle at 34% 28%,#ffffff 0%,#fff6e2 10%,#f0cdbe 26%,#9b7a82 52%,#f7e0cb 70%,#765c6c 88%,#fff5ea 100%);
+  box-shadow:0 18px 44px rgba(40,6,20,.5), inset -9px -12px 24px rgba(70,20,45,.45)}
+.esfera::before{content:"";position:absolute;inset:-25%;
+  background:conic-gradient(from 0deg,rgba(255,255,255,.85),rgba(250,226,4,.6),rgba(255,47,135,.5),rgba(255,255,255,.9),rgba(255,122,182,.5),rgba(250,226,4,.55),rgba(255,255,255,.85));
+  mix-blend-mode:overlay;animation:girar 14s linear infinite}
+.esfera::after{content:"";position:absolute;left:18%;top:12%;width:34%;height:22%;border-radius:50%;
+  background:radial-gradient(ellipse,rgba(255,255,255,.95),transparent 70%);filter:blur(2px)}
+.flare{position:absolute;left:50%;top:50%;width:210px;height:210px;transform:translate(-50%,-50%);pointer-events:none;animation:brilho 4.5s ease-in-out infinite}
+.flare b{position:absolute;left:50%;top:50%;height:2px;width:100%;transform:translate(-50%,-50%);filter:blur(.4px);
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.9),transparent)}
+.flare b:nth-child(2){transform:translate(-50%,-50%) rotate(90deg);width:70%}
+.flare b:nth-child(3){transform:translate(-50%,-50%) rotate(45deg);width:44%;opacity:.6}
+.flare b:nth-child(4){transform:translate(-50%,-50%) rotate(-45deg);width:44%;opacity:.6}
+@keyframes brilho{0%,100%{opacity:.5;transform:translate(-50%,-50%) scale(.92)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)}}
+.env .toque{font-size:10px;letter-spacing:.34em;text-transform:uppercase;border:1px solid rgba(247,235,224,.3);border-radius:999px;padding:11px 20px;animation:pulsar 2.6s ease-in-out infinite}
+@keyframes pulsar{0%,100%{opacity:.55}50%{opacity:1}}
+
+.env.abrindo{opacity:0;pointer-events:none}
+.env.abrindo .lacre{opacity:0;transform:scale(.4) rotate(-25deg)}
+.env.abrindo .aba{transform:rotateX(-172deg);z-index:1}
+.env.abrindo .cartinha{animation:sair 3.4s cubic-bezier(.45,0,.2,1) .5s forwards}
+.env.abrindo .toque{opacity:0;transition:opacity .3s}
+@keyframes sair{
+  0%{transform:translateY(0)}
+  34%{transform:translateY(-78%)}
+  80%{transform:translateY(-78%);opacity:1}
+  100%{transform:translateY(-104%);opacity:0}
+}
+.env[hidden]{display:none}
+
+/* ---------- estrutura ---------- */
+main{position:relative;z-index:10;padding:0 var(--gutr) 0 var(--gut);max-width:720px;margin:0 auto}
+section{padding:14vh 0}
+.sobe{opacity:0;transform:translateY(26px);transition:opacity 1s cubic-bezier(.2,.7,.2,1),transform 1s cubic-bezier(.2,.7,.2,1)}
+.sobe.visto{opacity:1;transform:none}
+.atraso1{transition-delay:.12s}.atraso2{transition-delay:.24s}.atraso3{transition-delay:.36s}
+
+/* capa */
+header.capa{min-height:100svh;display:flex;flex-direction:column;justify-content:center;gap:28px;padding-top:12vh;padding-bottom:10vh}
+.moldura{position:relative;width:min(76%,320px);margin:0 auto clamp(34px,11vw,62px)}
+.portal{position:relative;width:100%;aspect-ratio:3/4;border-radius:50%/44%;overflow:hidden;
+  background:
+    radial-gradient(130% 100% at 30% 10%,rgba(255,233,138,.95),transparent 50%),
+    radial-gradient(120% 110% at 80% 85%,rgba(255,47,135,.95),transparent 56%),
+    linear-gradient(150deg,#ffd23f,#ff7ab6 52%,#ff2f87);
+  box-shadow:0 40px 90px rgba(255,47,135,.22), inset 0 0 70px rgba(255,255,255,.25);
+  transform:scale(.86);opacity:0;transition:transform 1.6s cubic-bezier(.2,.7,.2,1),opacity 1.4s ease}
+html.aberto .portal{transform:scale(1);opacity:1}
+html.aberto .moldura .p32{animation:sobe32 1.4s cubic-bezier(.2,.7,.2,1) both .5s}
+@keyframes sobe32{from{opacity:0;transform:translateX(-50%) translateY(28px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}
+html.aberto .moldura .p32{animation:sobe32 1.4s cubic-bezier(.2,.7,.2,1) both .5s, brilha32 5s ease-in-out infinite 2s}
+@keyframes brilha32{0%,100%{text-shadow:0 16px 46px rgba(20,5,14,.6)}50%{text-shadow:0 16px 46px rgba(20,5,14,.6),0 0 34px rgba(255,210,63,.55)}}
+.portal::before{content:"";position:absolute;inset:0;background-image:var(--grao);opacity:.26;mix-blend-mode:overlay}
+.portal::after{content:"";position:absolute;inset:8%;border-radius:50%/44%;border:1px solid rgba(255,255,255,.35)}
+.retrato{position:absolute;inset:-6% 0 0;width:100%;height:112%;object-fit:cover;object-position:50% 18%;will-change:translate;filter:saturate(1.1) contrast(1.05) brightness(1.04);z-index:1}
+.portal .luz{position:absolute;inset:0;z-index:2;background:linear-gradient(158deg,rgba(255,210,63,.62),rgba(255,122,182,.34) 44%,rgba(255,47,135,.6));mix-blend-mode:multiply;animation:respira 12s ease-in-out infinite alternate}
+.portal .luz2{position:absolute;inset:0;z-index:3;background:radial-gradient(70% 50% at 28% 14%,rgba(255,246,207,.55),transparent 62%),radial-gradient(60% 50% at 82% 86%,rgba(255,47,135,.3),transparent 64%);mix-blend-mode:screen}
+@keyframes respira{0%{opacity:.78}100%{opacity:1}}
+.moldura .p32{position:absolute;z-index:6;left:50%;bottom:-.3em;transform:translateX(-50%);font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(92px,28vw,158px);line-height:.78;color:var(--creme);text-shadow:0 16px 46px rgba(20,5,14,.6);pointer-events:none}
+.capa .linha{font-size:10px;letter-spacing:.44em;text-transform:uppercase;text-align:center;opacity:.75}
+.capa h1{position:relative;z-index:8;font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(40px,12vw,76px);line-height:.95;margin:0;text-align:center}
+.capa h1 em{font-style:italic;color:var(--amarelo)}
+.capa .data{text-align:center;font-size:11px;letter-spacing:.22em;text-transform:uppercase;opacity:.8;line-height:1.9;max-width:34ch;margin:0 auto}
+.seta{width:1px;height:54px;margin:8px auto 0;background:linear-gradient(var(--creme),transparent);animation:desce 2.4s ease-in-out infinite}
+@keyframes desce{0%,100%{opacity:.25;transform:scaleY(.6)}50%{opacity:.9;transform:scaleY(1)}}
+
+/* letreiro */
+.letreiro{overflow:hidden;border-top:1px solid rgba(247,235,224,.16);border-bottom:1px solid rgba(247,235,224,.16);padding:13px 0;margin:0 calc(var(--gut) * -1)}
+.letreiro ul{display:flex;gap:30px;list-style:none;margin:0;padding:0;white-space:nowrap;animation:correr 26s linear infinite;width:max-content}
+.letreiro li{font-size:11px;letter-spacing:.4em;text-transform:uppercase;opacity:.8}
+.letreiro li span{color:var(--amarelo)}
+@keyframes correr{to{transform:translateX(-50%)}}
+
+/* contagem */
+.conta{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;padding:9vh 0}
+.conta div{text-align:center;border:1px solid rgba(247,235,224,.18);border-radius:999px;padding:16px 4px;background:rgba(255,255,255,.03);backdrop-filter:blur(6px)}
+.conta b{display:block;font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(24px,7vw,38px);line-height:1}
+.conta small{display:block;margin-top:6px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;opacity:.6}
+
+/* carta */
+.carta{text-align:center}
+.carta p{font-size:clamp(17px,4.6vw,21px);line-height:1.62;margin:0 auto;font-weight:300;max-width:30ch}
+.carta .assina{margin-top:26px;font-family:'Bodoni Moda',serif;font-style:italic;font-size:22px;opacity:.9}
+
+/* atos */
+.ato{padding:11vh 0}
+.ato .quadro{margin-bottom:18px}
+.quadro.visto{animation:boia 7.5s ease-in-out 1.2s infinite alternate}
+@keyframes boia{from{transform:translateY(-7px)}to{transform:translateY(7px)}}
+.ato.a2{text-align:right}
+.ato.a2 .mapa{text-align:left}
+.quadro{position:relative;width:52%;overflow:hidden;aspect-ratio:4/5;margin-bottom:24px;
+  box-shadow:0 30px 70px rgba(10,3,8,.5);background-size:cover;background-position:center}
+.quadro::before{content:"";position:absolute;inset:0;background-image:var(--grao);opacity:.28;mix-blend-mode:overlay;z-index:3}
+.quadro::after{content:"";position:absolute;inset:0;z-index:2;background:radial-gradient(60% 50% at 50% 50%,rgba(14,5,10,.34),transparent 72%)}
+.quadro .cena{position:absolute;inset:0;z-index:1;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}
+.visto .quadro .cena{transform:scale(1.04)}
+/* 01 arco, alinhado à esquerda */
+.q1{border-radius:999px 999px 16px 16px}
+.q1 .cena{background:radial-gradient(85% 65% at 28% 16%,#fff6cf,transparent 58%),linear-gradient(168deg,#ffd23f 8%,#ff7ab6 58%,#ff2f87 100%)}
+/* 02 círculo, alinhado à direita */
+.q2{width:46%;margin-left:auto;aspect-ratio:1/1;border-radius:50%}
+.q2 .cena{background:radial-gradient(78% 78% at 74% 20%,#ff2f87,rgba(255,47,135,0) 66%),radial-gradient(86% 86% at 18% 88%,#ffd23f,rgba(255,210,63,0) 68%),linear-gradient(152deg,#ffc2dd,#ff8ec2 55%,#ffd98f)}
+/* 03 arco invertido, largo */
+.q3{width:62%;aspect-ratio:5/4;border-radius:18px 18px 999px 999px}
+.q3 .cena{background:radial-gradient(60% 60% at 76% 78%,#ffe98a,transparent 60%),linear-gradient(28deg,#ff2f87 10%,#ff7ab6 48%,#ffd23f 100%)}
+.quadro .hora{position:absolute;inset:0;z-index:4;display:flex;align-items:center;justify-content:center;
+  font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(40px,13vw,62px);line-height:1;color:#fff;
+  text-shadow:0 8px 34px rgba(18,4,10,.45)}
+p.tipo{margin:0 0 14px;font-size:9px;letter-spacing:.34em;text-transform:uppercase;opacity:.6}
+.ato h3{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(28px,8vw,42px);margin:0 0 6px;line-height:1.05}
+.ato .onde{margin:0 0 16px;font-size:11px;letter-spacing:.24em;text-transform:uppercase;opacity:.62}
+.ato p.txt{margin:0 0 20px;font-size:16px;line-height:1.6;opacity:.92;font-weight:300}
+.mapa{display:inline-block;font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--creme);text-decoration:none;border-bottom:1px solid rgba(247,235,224,.45);padding-bottom:5px;transition:color .3s,border-color .3s}
+.mapa:hover{color:var(--amarelo);border-color:var(--amarelo)}
+.trecho{display:flex;align-items:center;gap:14px;padding:2vh 0;font-size:10px;letter-spacing:.28em;text-transform:uppercase;opacity:.55}
+.trecho::before,.trecho::after{content:"";flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(247,235,224,.4),transparent)}
+
+/* rsvp */
+/* barra de progresso */
+.prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:70;background:linear-gradient(90deg,#ffd23f,#ff7ab6,#ff2f87);box-shadow:0 0 16px rgba(255,47,135,.55)}
+
+/* astro */
+.astro{position:relative;width:min(66%,250px);aspect-ratio:1/1;margin:0 auto 34px}
+.sol{position:absolute;inset:27%;border-radius:50%;background:radial-gradient(circle at 50% 50%,#160610 0 54%,rgba(255,210,63,.95) 60%,#ff2f87 100%);box-shadow:0 0 70px rgba(255,47,135,.35),inset 0 0 30px rgba(255,210,63,.3);animation:pulsa 5s ease-in-out infinite}
+.raios{position:absolute;inset:8%;border-radius:50%;background:conic-gradient(from 0deg,rgba(255,210,63,.7) 0 2.4deg,transparent 2.4deg 15deg);-webkit-mask:radial-gradient(circle,transparent 54%,#000 55%);mask:radial-gradient(circle,transparent 54%,#000 55%);animation:girar 60s linear infinite}
+.orb{position:absolute;inset:0;border:1px solid rgba(255,210,63,.3);border-radius:50%;animation:girar 26s linear infinite}
+.orb.o2{inset:14%;border-color:rgba(255,47,135,.35);animation-duration:17s;animation-direction:reverse}
+.orb i{position:absolute;top:-5px;left:50%;width:9px;height:9px;margin-left:-4.5px;border-radius:50%;background:#ff2f87;box-shadow:0 0 16px #ff2f87}
+.orb.o2 i{background:#ffd23f;box-shadow:0 0 16px #ffd23f}
+.glifo{position:absolute;left:50%;top:50%;width:30%;transform:translate(-50%,-50%);z-index:4;filter:drop-shadow(0 0 12px rgba(255,47,135,.55))}
+.glifo svg{display:block;width:100%;height:auto}
+@keyframes pulsa{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+.ciclo{text-align:center}
+.ciclo h2{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(28px,8vw,42px);margin:0 0 14px;line-height:1.05}
+.ciclo h2 em{font-style:italic;color:var(--amarelo)}
+.ciclo p{margin:0 auto 14px;max-width:32ch;font-size:16px;line-height:1.62;opacity:.92;font-weight:300}
+.ciclo .selo-lista{display:inline-block;margin-top:18px;font-size:10px;letter-spacing:.3em;text-transform:uppercase;border:1px solid rgba(255,210,63,.45);color:var(--amarelo);border-radius:999px;padding:10px 18px}
+
+
+.dress{text-align:center}
+.dress .box{position:relative;border-radius:28px;padding:34px 24px 30px;background:linear-gradient(150deg,rgba(255,210,63,.14),rgba(255,47,135,.18));
+  border:1px solid rgba(255,210,63,.4);box-shadow:0 30px 70px rgba(10,3,8,.55),inset 0 0 50px rgba(255,47,135,.08);backdrop-filter:blur(6px)}
+.dress .roupas{display:flex;justify-content:center;align-items:center;gap:14px;margin-bottom:16px}
+.dress .roupas svg{width:38px;height:38px;animation:boia2 5s ease-in-out infinite alternate;filter:drop-shadow(0 0 10px rgba(255,47,135,.35))}
+.dress .roupas svg:nth-child(2){animation-delay:-1.6s}
+.dress .roupas svg:nth-child(3){animation-delay:-3.2s}
+.dress .tipo{margin-bottom:10px}
+.dress h2{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(28px,8vw,40px);margin:0 0 14px;line-height:1.05}
+.dress h2 em{font-style:italic;color:var(--amarelo)}
+.dress .txt{margin:0 auto;font-size:16px;line-height:1.6;opacity:.92;max-width:30ch;font-weight:300}
+.dress .aviso{margin:22px 0 0;font-size:10px;letter-spacing:.3em;text-transform:uppercase;opacity:.5}
+.bolas{display:flex;gap:14px;margin:26px auto 0;justify-content:center}
+.b{width:clamp(46px,14vw,62px);aspect-ratio:1/1;border-radius:50%;position:relative}
+.bpreto{background:linear-gradient(150deg,#2b2028,#0c0609);border:1px solid rgba(247,235,224,.28)}
+.brosa{background:radial-gradient(circle at 34% 30%,#ffb3d4,#ff2f87 72%);box-shadow:0 12px 32px rgba(255,47,135,.35)}
+.bamarelo{background:radial-gradient(circle at 34% 30%,#fff6cf,#ffd23f 72%);box-shadow:0 12px 32px rgba(255,210,63,.3)}
+.bbranco{background:radial-gradient(circle at 34% 30%,#ffffff,#e8dfd8 72%);box-shadow:0 12px 32px rgba(255,255,255,.18)}
+.b{animation:boia2 6s ease-in-out infinite alternate}
+.brosa{animation-delay:-1.4s}.bamarelo{animation-delay:-2.8s}.bbranco{animation-delay:-4.2s}
+@keyframes boia2{from{transform:translateY(-5px)}to{transform:translateY(5px)}}
+.rsvp{padding-bottom:12vh;text-align:center}
+.rsvp .caixa{position:relative;padding:44px 26px 38px;
+  border-radius:48% 52% 46% 54% / 16% 14% 13% 15%;
+  background:linear-gradient(155deg,rgba(255,210,63,.13),rgba(255,47,135,.17));
+  border:1px solid rgba(255,210,63,.32);
+  box-shadow:0 34px 80px rgba(10,3,8,.55),inset 0 0 60px rgba(255,47,135,.07);backdrop-filter:blur(6px)}
+.rsvp h2{font-family:'Bodoni Moda',serif;font-weight:500;font-size:clamp(34px,10vw,52px);margin:0 0 8px}
+.rsvp .sub{margin:0 0 26px;font-size:15px;line-height:1.5;opacity:.75}
+.campo{width:100%;text-align:center;background:transparent;border:0;border-bottom:1px solid rgba(247,235,224,.35);color:var(--creme);font-family:'Jost',sans-serif;font-size:17px;padding:12px 0;outline:none;transition:border-color .3s}
+.campo::placeholder{color:rgba(247,235,224,.4)}
+.campo:focus{border-color:var(--amarelo)}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin:24px 0 28px}
+.chip{cursor:pointer}
+.chip input{position:absolute;opacity:0;width:0;height:0}
+.chip span{display:inline-flex;align-items:center;gap:7px;padding:13px 18px;border-radius:999px;border:1px solid rgba(247,235,224,.3);font-size:14px;transition:background .3s,color .3s,border-color .3s,box-shadow .3s,transform .2s}
+.chip span b{font-size:10px;letter-spacing:.14em;font-weight:400;opacity:.55}
+.chip input:checked+span{background:linear-gradient(104deg,#ffd23f,#ff2f87);border-color:transparent;color:#1a0610;box-shadow:0 12px 30px rgba(255,47,135,.3)}
+.chip input:checked+span b{opacity:.7}
+.chip input:focus-visible+span{outline:2px solid var(--amarelo);outline-offset:2px}
+.chip span:active{transform:scale(.96)}
+.zap{position:relative;overflow:hidden;display:block;text-align:center;text-decoration:none;color:#1a0710;font-weight:500;font-size:12px;letter-spacing:.3em;text-transform:uppercase;padding:19px;border-radius:999px;
+  background:linear-gradient(100deg,#ffd23f,#ffb3d4 48%,#ff2f87);box-shadow:0 18px 44px rgba(255,47,135,.3);transition:transform .3s,box-shadow .3s;margin-top:4px}
+.zap:hover{transform:translateY(-2px);box-shadow:0 24px 54px rgba(255,47,135,.4)}
+.zap::after{content:"";position:absolute;top:0;left:-70%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.7),transparent);animation:varre 3.6s ease-in-out infinite}
+@keyframes varre{0%{left:-70%}60%,100%{left:130%}}
+footer{text-align:center;padding:0 0 16vh}
+footer .fim{font-family:'Bodoni Moda',serif;font-style:italic;font-size:clamp(24px,7vw,34px);margin:0 0 10px}
+footer .mini{font-size:10px;letter-spacing:.36em;text-transform:uppercase;opacity:.45}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  .sobe{opacity:1;transform:none}
+  .portal{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+<div class="gels" aria-hidden="true"><i class="gel g1"></i><i class="gel g2"></i><i class="gel g3"></i><i class="gel g4"></i></div>
+<div class="prog" id="prog" aria-hidden="true"></div>
+<div class="vinheta" aria-hidden="true"></div>
+<div class="grao" aria-hidden="true"></div>
+<canvas id="glitter" aria-hidden="true"></canvas>
+
+<button class="env" id="env" aria-label="Abrir o convite">
+  <span class="envelope">
+    <span class="corpo glit"></span>
+    <span class="cartinha"><em>Você está convidado</em><b>Toral faz 32</b><i>14 . 11 . 2026</i></span>
+    <span class="frente glit"></span>
+    <span class="aba glit"></span>
+    <span class="lacre"><i class="esfera"></i><i class="flare" aria-hidden="true"><b></b><b></b><b></b><b></b></i></span>
+  </span>
+  <span class="toque">Toque para abrir</span>
+</button>
+
+<main id="convite">
+
+  <header class="capa">
+    <p class="linha">14 . 11 . 2026 · Curitiba</p>
+    <div class="moldura">
+      <div class="portal">
+        <img class="retrato" src="toral.jpg" alt="Toral" width="820" height="1098">
+        <span class="luz" aria-hidden="true"></span><span class="luz2" aria-hidden="true"></span>
+      </div>
+      <span class="p32" aria-hidden="true">32</span>
+    </div>
+    <h1>Um sábado<br><em>inteiro</em></h1>
+    <p class="data">Brunch · Contemplação · Jovem demais pra ser velho</p>
+    <div class="seta" aria-hidden="true"></div>
+  </header>
+
+  <div class="letreiro" aria-hidden="true">
+    <ul id="mq"></ul>
+  </div>
+
+  <section class="conta sobe" aria-label="Contagem regressiva">
+    <div><b id="d">00</b><small>dias</small></div>
+    <div><b id="h">00</b><small>horas</small></div>
+    <div><b id="m">00</b><small>min</small></div>
+    <div><b id="s">00</b><small>seg</small></div>
+  </section>
+
+  <section class="carta sobe">
+    <p>Meu plano para os 32 é simples: um sábado inteiro, sem pressa, com quem eu realmente quero por perto. A lista é beeem seleta. O dia tem três momentos. Venha em todos ou só no que couber na sua agenda.</p>
+    <p class="assina">Toral</p>
+  </section>
+
+  <section class="ciclo sobe">
+    <div class="astro" aria-hidden="true">
+      <span class="raios"></span>
+      <span class="orb o1"><i></i></span>
+      <span class="orb o2"><i></i></span>
+      <span class="sol"></span>
+      <span class="glifo"><svg viewBox="0 0 104 104" fill="none" aria-hidden="true">
+        <defs><linearGradient id="gEsc" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#ffd23f"/><stop offset="55%" stop-color="#ff7ab6"/><stop offset="100%" stop-color="#ff2f87"/>
+        </linearGradient></defs>
+        <g stroke="url(#gEsc)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M10 76V42a11 11 0 0 1 22 0v34"/>
+          <path d="M32 42a11 11 0 0 1 22 0v34"/>
+          <path d="M54 42a11 11 0 0 1 22 0v30l16 16"/>
+          <path d="M92 74v18H74"/>
+        </g>
+      </svg></span>
+    </div>
+    <p class="tipo" style="text-align:center">Retorno solar</p>
+    <h2>Começa um <em>ciclo novo</em></h2>
+    <p>No dia 14 o Sol volta para o ponto exato em que estava quando eu nasci. Isso tem nome: retorno solar. Não é o fim de um ano, é o começo de outro.</p>
+    <p>Sol em Escorpião, que é a casa da intensidade, da transformação e do que renasce diferente. Os 32 chegam com propósito e eu quero pouca gente e muita energia boa por perto.</p>
+    <span class="selo-lista">Lista beeem seleta</span>
+  </section>
+
+  <section class="ato">
+    <div class="quadro q1 sobe"><span class="cena"></span><span class="hora">11h</span></div>
+    <p class="tipo sobe">Brunch</p>
+    <h3 class="sobe atraso1">Casa Figueira Café</h3>
+    <p class="onde sobe atraso1">Rua Goiás, 876 · Água Verde</p>
+    <p class="txt sobe atraso2">Minha refeição favorita abre o dia. A mesa fica aberta para quem quiser chegar.</p>
+    <a class="mapa sobe atraso3" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Casa+Figueira+Caf%C3%A9+Rua+Goi%C3%A1s+876+Curitiba">Ver no mapa</a>
+  </section>
+
+  <p class="trecho sobe">De tubo pela República Argentina</p>
+
+  <section class="ato a2">
+    <div class="quadro q2 sobe"><span class="cena"></span><span class="hora">15h</span></div>
+    <p class="tipo sobe">Momento de contemplação</p>
+    <h3 class="sobe atraso1">Passeio Público</h3>
+    <p class="onde sobe atraso1">Centro</p>
+    <p class="txt sobe atraso2">Canga na sombra das árvores, longe do parquinho. Traga algo gostoso para dividir.</p>
+    <a class="mapa sobe atraso3" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Passeio+P%C3%BAblico+Curitiba">Ver no mapa</a>
+  </section>
+
+  <p class="trecho sobe">Poucos minutos a pé</p>
+
+  <section class="ato">
+    <div class="quadro q3 sobe"><span class="cena"></span><span class="hora">18h</span></div>
+    <p class="tipo sobe">Jovem demais pra ser velho</p>
+    <h3 class="sobe atraso1">Cataia Bar</h3>
+    <p class="onde sobe atraso1">Praça 19 de Dezembro, 13 · Centro</p>
+    <p class="txt sobe atraso2">Drinks e conversa, sem hora para acabar. Vá embora quando quiser.</p>
+    <a class="mapa sobe atraso3" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Cataia+Bar+Pra%C3%A7a+19+de+Dezembro+Curitiba">Ver no mapa</a>
+  </section>
+
+
+  <section class="dress sobe">
+    <div class="box">
+      <span class="roupas" aria-hidden="true">
+        <svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="gr1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ffd23f"/><stop offset="100%" stop-color="#ff2f87"/></linearGradient></defs><path d="M22 10 L14 15 L9 26 L16 30 L18 26 V54 H46 V26 L48 30 L55 26 L50 15 L42 10 C40 17 24 17 22 10 Z" stroke="url(#gr1)" stroke-width="3.4" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="gr2" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#ff7ab6"/><stop offset="100%" stop-color="#ffd23f"/></linearGradient></defs><g stroke="url(#gr2)" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"><rect x="6" y="26" width="21" height="16" rx="6"/><rect x="37" y="26" width="21" height="16" rx="6"/><path d="M27 32h10M6 28c-1-6 2-8 5-9M58 28c1-6-2-8-5-9"/></g></svg>
+        <svg viewBox="0 0 64 64" fill="none"><defs><linearGradient id="gr3" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#ff2f87"/><stop offset="100%" stop-color="#ffd23f"/></linearGradient></defs><g stroke="url(#gr3)" stroke-width="3.4" stroke-linejoin="round" stroke-linecap="round"><path d="M12 42c0-13 9-22 20-22s20 9 20 22z"/><path d="M8 42h48v5H8z"/><path d="M32 20v-4"/></g></svg>
+      </span>
+      <p class="tipo">Dress code</p>
+      <h2>Monte seu <em>lukinhas do dia</em></h2>
+      <p class="txt">Camiseta branca ou preta. Parte de baixo em jeans ou outro tom neutro. Os acessórios entram em rosa ou amarelo: óculos, boné, brinco, meia, lenço, bolsa.</p>
+      <div class="bolas" aria-hidden="true"><span class="b bbranco"></span><span class="b bpreto"></span><span class="b brosa"></span><span class="b bamarelo"></span></div>
+      <p class="aviso">Capricha, vou querer foto</p>
+    </div>
+  </section>
+
+  <section class="rsvp sobe">
+    <div class="caixa">
+    <h2>Você vem?</h2>
+    <p class="sub">Marque o que couber na sua agenda.</p>
+    <form id="form-rsvp" onsubmit="return false">
+      <input class="campo" id="nome" type="text" placeholder="Seu nome" autocomplete="name">
+      <div class="chips">
+        <label class="chip"><input type="checkbox" id="vai-cafe"><span>Brunch <b>11h</b></span></label>
+        <label class="chip"><input type="checkbox" id="vai-pique"><span>Contemplação <b>15h</b></span></label>
+        <label class="chip"><input type="checkbox" id="vai-bar"><span>Jovem demais <b>18h</b></span></label>
+      </div>
+      <a class="zap" id="zap" target="_blank" rel="noopener" href="https://wa.me/5511972810526">Confirmar no WhatsApp</a>
+    </form>
+    </div>
+  </section>
+
+  <footer>
+    <p class="fim">Te espero no dia 14.</p>
+    <p class="mini">Toral · 32</p>
+  </footer>
+
+</main>
+
+<script>
+(function(){
+  var raiz = document.documentElement;
+  raiz.classList.add('fechado');
+  var reduz = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* letreiro */
+  var mq = document.getElementById('mq');
+  if (mq){
+    var itens = ['Toral faz 32','<span>&#10022;</span>','Sábado 14 nov 2026','<span>&#10022;</span>','Curitiba','<span>&#10022;</span>','Preto com rosa, amarelo ou branco','<span>&#10022;</span>','Retorno solar','<span>&#10022;</span>','Lista beeem seleta','<span>&#10022;</span>'];
+    mq.innerHTML = (itens.join('') ? '' : '') + itens.map(function(t){return '<li>'+t+'</li>';}).join('') + itens.map(function(t){return '<li>'+t+'</li>';}).join('');
+  }
+
+  /* abrir */
+  var env = document.getElementById('env');
+  function abrir(){
+    if (env.classList.contains('abrindo')) return;
+    env.classList.add('abrindo');
+    raiz.classList.remove('fechado');
+    setTimeout(function(){ raiz.classList.add('aberto'); revelar(); }, reduz ? 0 : 3100);
+    setTimeout(function(){ env.hidden = true; }, reduz ? 300 : 4000);
+    window.scrollTo(0,0);
+  }
+  env.addEventListener('click', abrir);
+
+  /* contagem */
+  var alvo = new Date('2026-11-14T11:00:00-03:00').getTime();
+  var el = {d:document.getElementById('d'),h:document.getElementById('h'),m:document.getElementById('m'),s:document.getElementById('s')};
+  function p2(n){return (n<10?'0':'')+n;}
+  function tick(){
+    var dif = alvo - Date.now();
+    if (dif < 0) dif = 0;
+    var seg = Math.floor(dif/1000);
+    el.d.textContent = p2(Math.floor(seg/86400));
+    el.h.textContent = p2(Math.floor(seg%86400/3600));
+    el.m.textContent = p2(Math.floor(seg%3600/60));
+    el.s.textContent = p2(seg%60);
+  }
+  tick();
+  setInterval(function(){
+    tick();
+    if (!reduz && el.s.animate){
+      el.s.animate([{transform:'scale(1.16)',opacity:.65},{transform:'scale(1)',opacity:1}],{duration:420,easing:'cubic-bezier(.2,.7,.2,1)'});
+    }
+  }, 1000);
+
+  /* barra de progresso */
+  var prog = document.getElementById('prog');
+  function andar(){
+    var max = document.body.scrollHeight - innerHeight;
+    prog.style.width = (max > 0 ? Math.min(window.scrollY / max, 1) * 100 : 0) + '%';
+  }
+  andar(); window.addEventListener('scroll', andar, {passive:true});
+
+  /* revelar */
+  var alvos = Array.prototype.slice.call(document.querySelectorAll('.sobe'));
+  var io = null;
+  function revelar(){
+    if (reduz){ alvos.forEach(function(e){e.classList.add('visto');}); return; }
+    if (io) return;
+    io = new IntersectionObserver(function(ents){
+      ents.forEach(function(en){ if (en.isIntersecting){ en.target.classList.add('visto'); io.unobserve(en.target); } });
+    }, {threshold:.15, rootMargin:'0px 0px -8% 0px'});
+    alvos.forEach(function(e){ io.observe(e); });
+  }
+
+  /* rsvp */
+  var zap = document.getElementById('zap');
+  function montar(){
+    var nome = (document.getElementById('nome').value || '').trim();
+    var vai = [];
+    if (document.getElementById('vai-cafe').checked) vai.push('brunch (11h)');
+    if (document.getElementById('vai-pique').checked) vai.push('contemplação (15h)');
+    if (document.getElementById('vai-bar').checked) vai.push('jovem demais pra ser velho (18h)');
+    var m = 'Oi Toral! ' + (nome ? 'Aqui é ' + nome + '. ' : '');
+    m += vai.length ? 'Vou no ' + vai.join(', ') + '.' : 'Ainda estou vendo os horários.';
+    zap.href = 'https://wa.me/5511972810526?text=' + encodeURIComponent(m);
+  }
+  document.getElementById('form-rsvp').addEventListener('input', montar);
+  montar();
+
+  /* parallax leve */
+  if (!reduz){
+    var retrato = document.querySelector('.retrato');
+    window.addEventListener('scroll', function(){
+      var y = window.scrollY;
+      if (retrato) retrato.style.translate = '0 ' + Math.min(y * 0.06, 40) + 'px';
+    }, {passive:true});
+  }
+
+  /* glitter */
+  var cv = document.getElementById('glitter');
+  if (cv && !reduz){
+    var ctx = cv.getContext('2d'), w, h, ps = [];
+    function dim(){ w = cv.width = innerWidth; h = cv.height = innerHeight; }
+    dim(); addEventListener('resize', dim);
+    var cores = ['#ffd23f','#ffe98a','#ff2f87','#ff7ab6','#ffffff','#fff6cf'];
+    for (var i=0;i<46;i++){
+      ps.push({x:Math.random()*innerWidth, y:Math.random()*innerHeight, r:Math.random()*1.6+.6,
+        v:Math.random()*.25+.06, f:Math.random()*Math.PI*2, c:cores[i%cores.length]});
+    }
+    function loop(){
+      ctx.clearRect(0,0,w,h);
+      for (var i=0;i<ps.length;i++){
+        var p = ps[i];
+        p.y += p.v; p.f += .035;
+        if (p.y > h + 10){ p.y = -10; p.x = Math.random()*w; }
+        var a = (Math.sin(p.f)+1)/2;
+        ctx.globalAlpha = a*.85;
+        ctx.fillStyle = p.c;
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,6.3); ctx.fill();
+        ctx.globalAlpha = a*.4;
+        ctx.fillRect(p.x-p.r*3.4, p.y-.35, p.r*6.8, .7);
+        ctx.fillRect(p.x-.35, p.y-p.r*3.4, .7, p.r*6.8);
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(loop);
+    }
+    loop();
+  }
+
+
+
+  if (reduz){ raiz.classList.remove('fechado'); revelar(); }
+})();
+</script>
+</body>
+</html>
